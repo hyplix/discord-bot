@@ -4,7 +4,7 @@
   "description": "Oh look! It's a Discord bot source made for the Hyplix Discord server.",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "npm tsc"
   },
   "repository": {
     "type": ".git",
