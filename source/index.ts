@@ -51,7 +51,7 @@ process.on("uncaughtException", (error) => {
 
 process.on("unhandledRejection", (reason) => {
     return console.error(reason);
-})
+});
 
 setListeners(client);
 client.login(process.env.DToken);
