@@ -1,5 +1,5 @@
 import { Client, GuildMember } from "discord.js";
-import { setCommands } from "./util";
+import { setCommands, setListeners } from "./util";
 import dotenv from "dotenv";
 
 dotenv.config({ 
@@ -21,9 +21,7 @@ const client = new Client({
 
 const commands = new Map();
 
-client.on("ready", () => {
-    console.log("Client is ready");
-
+client.once("ready", () => {
     setCommands(client, commands);
 });
 
@@ -47,4 +45,13 @@ client.on("interactionCreate", interaction => {
     }
 });
 
+process.on("uncaughtException", (error) => {
+    return console.error(error);
+});
+
+process.on("unhandledRejection", (reason) => {
+    return console.error(reason);
+})
+
+setListeners(client);
 client.login(process.env.DToken);

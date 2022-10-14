@@ -12,3 +12,11 @@ export function setCommands(client: Client, cache: Map<any, any>) {
         }
     }
 }
+
+export function setListeners(client: Client) {
+    for(const listenerPath of glob.sync("./dist/listeners/**/*.js")) {
+        const listener = require(path.resolve(listenerPath)).default;
+
+        if(listener) listener.add(client);
+    }
+}
