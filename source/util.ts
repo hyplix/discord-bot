@@ -20,3 +20,13 @@ export function setListeners(client: Client) {
         if(listener) listener.add(client);
     }
 }
+
+export function ordinalNumber(number: number) {
+    const str = number.toString();
+    
+    if(str.endsWith("1")) return str + "st";
+    if(str.endsWith("2")) return str + "nd";
+    if(str.endsWith("3")) return str + "rd";
+
+    return str + "th";
+}
