@@ -1,0 +1,25 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "Oh look! It's a Discord bot source made for the Hyplix Discord server.",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": ".git",
+    "url": "https://github.com/hyplix/discord-bot.git"
+  },
+  "author": "Hyplix <Rionde>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3",
+    "glob": "^8.0.3"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0",
+    "@types/node": "^18.8.4",
+    "typescript": "^4.8.4"
+  }
+}
