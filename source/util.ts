@@ -1,20 +1,21 @@
 import { Client } from "discord.js";
+import settings from "./settings";
 import glob from "glob";
 import path from "path";
 
 export function setCommands(client: Client, cache: Map<any, any>) {
-    for(const cmdPath of glob.sync("./dist/commands/**/*.js")) {
+    for(const cmdPath of glob.sync(settings.paths.command)) {
         const command = require(path.resolve(cmdPath)).default;
         
         if(command && command.name) {
-            command.post(client, process.env.GuildId);
+            command.post(client, settings.guildId);
             cache.set(command.name, command);
         }
     }
 }
 
 export function setListeners(client: Client) {
-    for(const listenerPath of glob.sync("./dist/listeners/**/*.js")) {
+    for(const listenerPath of glob.sync(settings.paths.listener)) {
         const listener = require(path.resolve(listenerPath)).default;
 
         if(listener) listener.add(client);

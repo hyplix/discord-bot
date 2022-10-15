@@ -1,6 +1,7 @@
 import { Client, GuildMember } from "discord.js";
 import { setCommands, setListeners } from "./util";
 import dotenv from "dotenv";
+import settings from "./settings"
 
 dotenv.config({ 
     path: ".env"
@@ -25,15 +26,13 @@ client.once("ready", () => {
     setCommands(client, commands);
 });
 
-const staffRole = process.env.StaffRoleId as string;
-
 client.on("interactionCreate", interaction => {
     if(!interaction.inGuild()) return;
     if(!interaction.isCommand()) return;
 
     const command = commands.get(interaction.commandName);
     if(command) {
-        if(command.staff === true && !(interaction.member.roles as GuildMember["roles"]).cache.has(staffRole)) return;
+        if(command.staff === true && !(interaction.member.roles as GuildMember["roles"]).cache.has(settings.roles.staff)) return;
 
         return command.exec({
             client,
