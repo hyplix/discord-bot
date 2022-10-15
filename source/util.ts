@@ -1,21 +1,23 @@
 import { Client } from "discord.js";
-import settings from "./settings";
 import glob from "glob";
 import path from "path";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function setCommands(client: Client, cache: Map<any, any>) {
-    for(const cmdPath of glob.sync(settings.paths.command)) {
+    for(const cmdPath of glob.sync("./dist/commands/**/*.js")) {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const command = require(path.resolve(cmdPath)).default;
         
         if(command && command.name) {
-            command.post(client, settings.guildId);
+            command.post(client, process.env.GuildId);
             cache.set(command.name, command);
         }
     }
 }
 
 export function setListeners(client: Client) {
-    for(const listenerPath of glob.sync(settings.paths.listener)) {
+    for(const listenerPath of glob.sync("./dist/listeners/**/*.js")) {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const listener = require(path.resolve(listenerPath)).default;
 
         if(listener) listener.add(client);
